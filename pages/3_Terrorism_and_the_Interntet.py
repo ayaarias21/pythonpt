@@ -1,7 +1,6 @@
 # Import necessary libraries
 import streamlit as st
 import pandas as pd
-import plotly.graph_objects as go
 #from streamlit_option_menu import option_menu
 st.set_page_config(page_title="Bytes and Bombs", page_icon="🚨", layout="centered")
 st.markdown("<h2 style='color: #990000;'>The Internet and Cyber-Terrorism</h2>", unsafe_allow_html=True)
@@ -30,10 +29,9 @@ data = {
 
 df = pd.DataFrame(data)
 
-# Create Plotly bar chart
-fig = go.Figure(data=[
-    go.Bar(x=df["Month"], y=df["Worm"], marker_color=df["Month"])
-])
+# Display the bar chart using Streamlit
+st.bar_chart(df.set_index("Month"))
+
 
 # Update layout for better visualization
 fig.update_layout(title="Worms of the Early 2000s", xaxis_title="Month of Emergence", yaxis_title=None)
