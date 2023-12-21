@@ -32,13 +32,6 @@ df = pd.DataFrame(data)
 # Display the bar chart using Streamlit
 st.bar_chart(df.set_index("Month"))
 
-
-# Update layout for better visualization
-fig.update_layout(title="Worms of the Early 2000s", xaxis_title="Month of Emergence", yaxis_title=None)
-
-# Display the chart using Streamlit
-st.plotly_chart(fig, use_container_width=True)
-
 st.write("Moving on the 2005-2013 era which was entitled the “Monetisation Era”, With the use of malvertising, spam, "
          "botnets, and trojans they terrorists were able to capitalize off this for money and profit instead of for "
          "notoriety. Spam, was initially used for spreading worms and eventually evolved into a monetized tool for "
