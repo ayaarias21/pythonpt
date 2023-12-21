@@ -1,6 +1,5 @@
 import streamlit as st
 import time
-import streamlit as st
 import pandas as pd
 import altair as alt
 #from streamlit_option_menu import option_menu
@@ -87,4 +86,3 @@ def main():
 
 if __name__ == "__main__":
     main()
-
