@@ -1,9 +1,8 @@
 # Import necessary libraries
 import streamlit as st
 import pandas as pd
-import altair as alt
+import plotly.graph_objects as go
 #from streamlit_option_menu import option_menu
-import pandas as pd  # read csv, df manipulation
 st.set_page_config(page_title="Bytes and Bombs", page_icon="🚨", layout="centered")
 st.markdown("<h2 style='color: #990000;'>The Internet and Cyber-Terrorism</h2>", unsafe_allow_html=True)
 st.write("Not limited to real world actualities of radicalization, within the cyber sphere, terrorist aim to use "
@@ -22,6 +21,7 @@ st.write('The Security Brief, New Zealand article entitled "A brief history of c
          'like CodeRed, Nimda, and Blaster exploited vulnerabilities in operating systems and network infrastructure '
          'as seen in the chart below. ')
 
+
 # Data
 data = {
     "Worm": ["CodeRed", "Code Red II", "Nimda", "SQL Slammer", "Blaster", "Welchia", "Sobig.F", "Sober", "Bagle", "MyDoom", "Netsky", "Sasser"],
@@ -30,15 +30,16 @@ data = {
 
 df = pd.DataFrame(data)
 
-# Chart
-st.title("Worms of the Early 2000s")
-chart = alt.Chart(df).mark_bar().encode(
-    y=alt.Y("Worm:N", title=None, sort='-x'),
-    x=alt.X("Month:N", title="Month of Emergence"),
-    color=alt.Color("Month:N", legend=None)
-).properties(width=600, height=300)
+# Create Plotly bar chart
+fig = go.Figure(data=[
+    go.Bar(x=df["Month"], y=df["Worm"], marker_color=df["Month"])
+])
 
-st.altair_chart(chart, use_container_width=True)
+# Update layout for better visualization
+fig.update_layout(title="Worms of the Early 2000s", xaxis_title="Month of Emergence", yaxis_title=None)
+
+# Display the chart using Streamlit
+st.plotly_chart(fig, use_container_width=True)
 
 st.write("Moving on the 2005-2013 era which was entitled the “Monetisation Era”, With the use of malvertising, spam, "
          "botnets, and trojans they terrorists were able to capitalize off this for money and profit instead of for "
