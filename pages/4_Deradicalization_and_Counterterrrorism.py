@@ -1,8 +1,3 @@
-# Import necessary libraries
-import streamlit as st
-#from streamlit_option_menu import option_menu
-import pandas as pd  # read csv, df manipulation
-st.set_page_config(page_title="Bytes and Bombs", page_icon="🚨", layout="centered")
 st.markdown("<h2 style='color: #990000;'>Deradicalization and Counter Terrorism </h2>",
             unsafe_allow_html=True)
 st.write("In an interview with Richard A. Clarke, a former senior White House advisor, the discussion revolves around "
@@ -41,5 +36,6 @@ st.write('Moving away from the call to state effort counter of terrorism as coun
          'de-radicalization, emphasizing re-education, vocational training, financial support, and the creation of a '
          'conducive environment for reintegration. ')
 # More information
+#from streamlit_option_menu import option_menu
+import pandas as pd  # read csv, df manipulation
 
-#st.write("[Learn More >](https://...)") #how to include a link
