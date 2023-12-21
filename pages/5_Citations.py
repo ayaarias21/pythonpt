@@ -19,10 +19,6 @@ st.write("ICT Cyber Desk. “Trends in Countering Cyber-Terrorism.” Analysis o
 st.write("Georgia, Holmer, “Countering Violent Extremism: A Peacebuilding Perspective”(https://www.usip.org/sites/default/files/SR336-Countering%20Violent%20Extremism-A%20Peacebuilding%20Perspective.pdf )")
 st.write("Islam, Md. Didarul. “De-Radicalisation of Terrorists: Theoretical Analysis and Case Studies.” Counter Terrorist Trends and Analyses 11, no. 5 (2019): 6–12.(https://www.jstor.org/stable/26631540.)")
 
-
-
-
-
 html_code = """
 <style>
   @keyframes rotate {
