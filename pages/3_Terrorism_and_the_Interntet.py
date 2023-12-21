@@ -1,8 +1,11 @@
-# Import necessary libraries
 import streamlit as st
+import time
 import pandas as pd
+import altair as alt
 #from streamlit_option_menu import option_menu
+import pandas as pd  # read csv, df manipulation
 st.set_page_config(page_title="Bytes and Bombs", page_icon="🚨", layout="centered")
+
 st.markdown("<h2 style='color: #990000;'>The Internet and Cyber-Terrorism</h2>", unsafe_allow_html=True)
 st.write("Not limited to real world actualities of radicalization, within the cyber sphere, terrorist aim to use "
          "cyber capabilities to further their ideological or political goals. This can include hacking into websites, "
@@ -20,17 +23,24 @@ st.write('The Security Brief, New Zealand article entitled "A brief history of c
          'like CodeRed, Nimda, and Blaster exploited vulnerabilities in operating systems and network infrastructure '
          'as seen in the chart below. ')
 
-
 # Data
-data = {
+data_altair = {
     "Worm": ["CodeRed", "Code Red II", "Nimda", "SQL Slammer", "Blaster", "Welchia", "Sobig.F", "Sober", "Bagle", "MyDoom", "Netsky", "Sasser"],
     "Month": ["July 2001", "August 2001", "September 2001", "January 2003", "August 2003", "August 2003", "August 2003", "October 2003", "January 2004", "January 2004", "February 2004", "April 2004"]
 }
 
-df = pd.DataFrame(data)
+df_altair = pd.DataFrame(data_altair)
 
-# Display the bar chart using Streamlit
-st.bar_chart(df.set_index("Month"))
+# Chart
+chart_altair = alt.Chart(df_altair).mark_bar().encode(
+    y=alt.Y("Worm:N", title=None, sort='-x'),
+    x=alt.X("Month:N", title="Month of Emergence"),
+    color=alt.Color("Month:N", legend=None)
+).properties(width=600, height=300)
+
+# Display the Altair chart
+st.altair_chart(chart_altair, use_container_width=True)
+
 
 st.write("Moving on the 2005-2013 era which was entitled the “Monetisation Era”, With the use of malvertising, spam, "
          "botnets, and trojans they terrorists were able to capitalize off this for money and profit instead of for "
@@ -48,30 +58,31 @@ st.write("Lastly, in the Ransomware Era from 2013-2020, with estimated damages i
          "publish it unless a ransom is paid. No individual or industry is immune, and no single technology is "
          "foolproof against ransomware attacks.")
 st.write("Below shows the region in which different crimes have been committed the most.")
-import plotly.express as px
-# Sample data (replace this with your actual data)
-data = {
+
+# Data
+data_altair = {
     'Region': ['Asia', 'Europe', 'North America', 'Middle East and Africa', 'Latin America'],
     'Server Access': [20, 26, 30, 18, 29],
     'Ransomware': [11, 12, 30, 12, 21],
     'Data Theft': [10, 10, 9, 14, 21],
 }
 
-# Create a stacked bar chart
-fig = px.bar(
-    data,
-    x='Region',
-    y=['Server Access', 'Ransomware', 'Data Theft'],
-    title='Distribution of Cyber Attack Types by Region (2021)',
-    labels={'value': 'Percentage'},
-    height=500,
-)
+df_altair = pd.DataFrame(data_altair)
 
-# Update layout for better visualization
-fig.update_layout(barmode='stack', legend=dict(title_text='Attack Type'))
+# Melt the DataFrame to make it tidy for Altair
+df_melted = df_altair.melt('Region', var_name='Attack Type', value_name='Count')
 
-# Display the chart using Streamlit
-st.plotly_chart(fig)
+# Stacked bar chart with Altair
+chart_altair = alt.Chart(df_melted).mark_bar().encode(
+    x='Region:N',
+    y='Count:Q',
+    color='Attack Type:N',
+    order=alt.Order('Attack Type:N', sort='ascending'),
+    tooltip=['Region:N', 'Count:Q']
+).properties(height=500)
+
+# Display the Altair chart
+st.altair_chart(chart_altair, use_container_width=True)
 
 st.write("Additionally, some other cyber-attacks listed by New Jersey Gov. Including android malware that purposely "
          "targets android mobile devices mobile devices that causes a range of attacks from device disablement to "
